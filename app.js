@@ -117,7 +117,7 @@ names = filterOut(names, [
   "DynamicsCompressorNode", "GainNode", "IIRFilterNode", "MediaElementAudioSourceNode", 
   "MediaStreamAudioSourceNode", "MediaStreamTrackAudioSourceNode", "MediaStreamAudioDestinationNode", 
   "PannerNode", "PeriodicWave", "OscillatorNode", "StereoPannerNode", "WaveShaperNode", 
-  "ScriptProcessorNode", "AudioProcessingEvent"
+  "ScriptProcessorNode", "AudioProcessingEvent", "OfflineAudioContext", "OfflineAudioCompletionEvent"
 ]);
 
 
@@ -147,8 +147,66 @@ names = filterOut(names, ["ScreenOrientation"]);
 
 
 // TODO: your code here
+// WebRTC API
+// https://w3c.github.io/webrtc-pc/#dom-rtctrackevent
+// WebRTC (Web Real-Time Communications) is a technology which enables Web applications and sites to 
+// capture and optionally stream audio and/or video media, as well as to exchange arbitrary data 
+// between browsers without requiring an intermediary.
+names = filterOut(names, [
+  "RTCTrackEvent", "RTCStatsReport", "RTCSessionDescription", "RTCRtpTransceiver", "RTCRtpSender", 
+  "RTCRtpReceiver", "RTCPeerConnectionIceEvent", "RTCPeerConnection", "RTCIceCandidate", "RTCErrorEvent", 
+  "RTCError", "RTCDataChannelEvent", "RTCDataChannel", "RTCDTMFToneChangeEvent", "RTCDTMFSender", 
+  "RTCCertificate"
+]);
 
 
+// MediaStream Image Capture
+// https://w3c.github.io/mediacapture-image/#photocapabilities-section
+// The MediaStream Image Capture API is an API for capturing images or videos from a photographic device. 
+// In addition to capturing data, it also allows you to retrieve information ...
+names = filterOut(names, [
+  "ImageCapture", "PhotoCapabilities", "MediaSettingsRange"
+]);
+
+
+// Media Capture and Streams
+// https://w3c.github.io/mediacapture-main
+// This document defines a set of JavaScript APIs that allow local media, including audio and video, 
+// to be requested from a platform.
+names = filterOut(names, [
+  "MediaStream", "MediaStreamEvent", "MediaStreamTrack", "MediaStreamTrackEvent",
+  "MediaDevices", "MediaDeviceInfo", "InputDeviceInfo", "OverconstrainedError"
+]);
+
+
+// Network​Information
+// https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation
+names = filterOut(names, ["NetworkInformation"]);
+
+
+// MediaStream Recording
+// https://w3c.github.io/mediacapture-record
+names = filterOut(names, ["MediaRecorder"]);
+
+
+// Media Capabilities
+// https://wicg.github.io/media-capabilities/
+names = filterOut(names, ["MediaCapabilities"]);
+
+
+// Web MIDI API
+// https://webaudio.github.io/web-midi-api/#midiaccess-interface
+names = filterOut(names, [
+  "MIDIInputMap", "MIDIOutputMap", "MIDIAccess", "MIDIPort", "MIDIInput",
+  "MIDIOutput", "MIDIMessageEvent", "MIDIConnectionEvent"
+]);
+
+
+// Unknown
+// not found in MDN
+names = filterOut(names, [
+  "MediaEncryptedEvent"
+]);
 // ============================================================================
 //                               HELPER
 // ============================================================================
