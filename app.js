@@ -157,3 +157,5 @@ function filterOut(names, props) {
   const set = new Set(props);
   return names.filter(e => !set.has(e));
 }
+
+export const words = names;
