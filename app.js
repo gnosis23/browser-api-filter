@@ -117,7 +117,8 @@ names = filterOut(names, [
   "DynamicsCompressorNode", "GainNode", "IIRFilterNode", "MediaElementAudioSourceNode", 
   "MediaStreamAudioSourceNode", "MediaStreamTrackAudioSourceNode", "MediaStreamAudioDestinationNode", 
   "PannerNode", "PeriodicWave", "OscillatorNode", "StereoPannerNode", "WaveShaperNode", 
-  "ScriptProcessorNode", "AudioProcessingEvent", "OfflineAudioContext", "OfflineAudioCompletionEvent"
+  "ScriptProcessorNode", "AudioProcessingEvent", "OfflineAudioContext", "OfflineAudioCompletionEvent",
+  "BaseAudioContext", "AudioScheduledSourceNode", "AudioParamMap"
 ]);
 
 
@@ -186,7 +187,7 @@ names = filterOut(names, ["NetworkInformation"]);
 
 // MediaStream Recording
 // https://w3c.github.io/mediacapture-record
-names = filterOut(names, ["MediaRecorder"]);
+names = filterOut(names, ["MediaRecorder", "BlobEvent", "MediaRecorderErrorEvent"]);
 
 
 // Media Capabilities
@@ -202,11 +203,182 @@ names = filterOut(names, [
 ]);
 
 
+// Indexed DB
+// https://w3c.github.io/IndexedDB/
+names = filterOut(names, [
+  "IDBRequest", "IDBOpenDBRequest", "IDBVersionChangeEvent", "IDBFactory", "IDBDatabase", 
+  "IDBObjectStore", "IDBIndex", "IDBKeyRange", "IDBCursor", "IDBCursorWithValue", 
+  "IDBTransaction"
+]);
+
+
+// Gamepad
+// https://w3c.github.io/gamepad/
+names = filterOut(names, [
+  "Gamepad", "GamepadEvent", "GamepadHapticActuator", "GamepadButton"
+]);
+
+// DOM
+// https://dom.spec.whatwg.org/
+names = filterOut(names, [
+  "StaticRange", "AbortController", "AbortSignal"
+]);
+
+// DOM4
+// https://www.w3.org/TR/dom/#interface-event
+names = filterOut(names, [
+  "Event", "CustomEvent", "EventTarget", "NodeList", "HTMLCollection",
+  "MutationObserver", "MutationRecord", "DOMImplementation", "Range",
+  "NodeIterator", "TreeWalker", "NodeFilter", "DOMTokenList", "DOMSettableTokenList",
+  "DOMError"
+]);
+
+
+// Media Capture from DOM Element
+// https://w3c.github.io/mediacapture-fromelement/
+names = filterOut(names, [
+  "CanvasCaptureMediaStreamTrack"
+]);
+
+// WebVR (firefox + edge)
+// https://immersive-web.github.io/webvr/spec/1.1/
+names = filterOut(names, [
+  "VRDisplay", "VRDisplayCapabilities", "VRFieldOfView", "VRPose", "VRFrameData", 
+  "VREyeParameters", "VRStageParameters", "VRDisplayEvent"
+]);
+
+// Web App Manifest
+// https://w3c.github.io/manifest/
+// 存储 Web App 元信息
+names = filterOut(names, ["BeforeInstallPromptEvent"]);
+
+// Battery
+// https://w3c.github.io/battery/
+names = filterOut(names, ["BatteryManager"]);
+
+// https://www.w3.org/TR/DOM-Level-3-XPath/xpath.html#XPathResult
+names = filterOut(names, [
+  "XPathResult", "XPathEvaluator", "XPathExpression", "XPathNSResolver", "XPathNamespace"
+]);
+
+// https://w3c.github.io/DOM-Parsing/
+names = filterOut(names, ["DOMParser", "XMLSerializer"]);
+
 // Unknown
 // not found in MDN
 names = filterOut(names, [
   "MediaEncryptedEvent"
 ]);
+
+// non standard
+names = filterOut(names, [
+  "TextEvent"
+]);
+
+// https://xhr.spec.whatwg.org/
+names = filterOut(names, [
+  "XMLHttpRequestEventTarget", "XMLHttpRequestUpload", "XMLHttpRequest", "FormData",
+  "ProgressEvent"
+]);
+
+// https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/
+names = filterOut(names, [
+  "UIEvent", "FocusEvent", "MouseEvent", "WheelEvent", "InputEvent",
+  "KeyboardEvent", "CompositionEvent", "MutationEvent"
+]);
+
+// https://wicg.github.io/visual-viewport/#the-visualviewport-interface
+names = filterOut(names, ["VisualViewport"]);
+
+// Web Video Text Track 
+// https://w3c.github.io/webvtt/
+names = filterOut(names, ["VTTCue", "VTTRegion"]);
+
+// URL
+// https://url.spec.whatwg.org/
+names = filterOut(names, ["URL", "URLSearchParams"]);
+
+// https://drafts.csswg.org/css-transitions/
+names = filterOut(names, ["TransitionEvent"]);
+
+// Touch Events
+// https://drafts.csswg.org/css-transitions/
+// 多点触控
+names = filterOut(names, ["Touch", "TouchEvent", "TouchList"]);
+
+// Long Tasks API
+// https://w3c.github.io/longtasks/#sec-TaskAttributionTiming
+// 帮助检测任务执行时间
+names = filterOut(names, ["PerformanceLongTaskTiming", "TaskAttributionTiming"]);
+
+// CSSOM
+// https://drafts.csswg.org/cssom/
+names = filterOut(names, [
+  "MediaList", "StyleSheet", "CSSStyleSheet", "StyleSheetList", 
+  "LinkStyle", "CSSRuleList", "CSSRule", "CSSStyleRule", "CSSImportRule", 
+  "CSSGroupingRule", "CSSPageRule", "CSSMarginRule", "CSSNamespaceRule", 
+  "CSSStyleDeclaration", "ElementCSSInlineStyle"
+]);
+
+// CSSOM View
+// https://drafts.csswg.org/cssom-view/
+names = filterOut(names, [
+  "MediaQueryList", "MediaQueryListEvent", "Screen", "CaretPosition"
+]);
+
+// CSS Typed OM Level 1
+// https://drafts.css-houdini.org/css-typed-om-1/
+names = filterOut(names, [
+  "CSSStyleValue", "StylePropertyMapReadOnly", "StylePropertyMap", "CSSUnparsedValue", 
+  "CSSVariableReferenceValue", "CSSKeywordValue", "CSSNumericValue", "CSSUnitValue", 
+  "CSSMathValue", "CSSMathSum", "CSSMathProduct", "CSSMathNegate", "CSSMathInvert", 
+  "CSSMathMin", "CSSMathMax", "CSSMathClamp", "CSSNumericArray", "CSSTransformValue", 
+  "CSSTransformComponent", "CSSTranslate", "CSSRotate", "CSSScale", "CSSSkew", "CSSSkewX", 
+  "CSSSkewY", "CSSPerspective", "CSSMatrixComponent", "CSSImageValue"
+]);
+
+// Selection API
+// https://w3c.github.io/selection-api
+names = filterOut(names, ["Selection"]);
+
+// Webapp Security
+// https://w3c.github.io/webappsec-csp/
+names = filterOut(names, ["CSPViolationReportBody", "SecurityPolicyViolationEvent"]);
+
+// SVG
+// https://svgwg.org/svg2-draft/types.html
+names = filterOut(names, [
+  "SVGUnitTypes", "SVGTransformList", "SVGTransform", "SVGStringList",
+  "SVGRect", "SVGPreserveAspectRatio", "SVGPointList", "SVGPoint", 
+  "SVGNumberList", "SVGNumber", "SVGMatrix", 
+  "SVGLengthList", "SVGLength", "SVGAngle",
+  "SVGAnimatedTransformList", "SVGAnimatedString", "SVGAnimatedRect", 
+  "SVGAnimatedPreserveAspectRatio", "SVGAnimatedNumberList", "SVGAnimatedNumber", 
+  "SVGAnimatedLengthList", "SVGAnimatedLength", "SVGAnimatedInteger", 
+  "SVGAnimatedEnumeration", "SVGAnimatedBoolean", "SVGAnimatedAngle", 
+]);
+
+// fetch
+// https://fetch.spec.whatwg.org/
+names = filterOut(names, ["Headers", "Request", "Response"]);
+
+// https://drafts.csswg.org/resize-observer/#resize-observer-entry-interface
+names = filterOut(names, [
+  "ResizeObserver", "ResizeObserverEntry"
+]);
+
+// ReportingObserver (chrome)
+names = filterOut(names, ["ReportingObserver"]);
+
+// Pointer Event
+// https://w3c.github.io/pointerevents/#pointerevent-interface
+names = filterOut(names, ["PointerEvent"]);
+
+// PerformanceTiming
+// deprecated
+names = filterOut(names, ["PerformanceTiming"]);
+
+
 // ============================================================================
 //                               HELPER
 // ============================================================================
