@@ -43,12 +43,15 @@ names = names.filter(e => {
 // https://html.spec.whatwg.org/#window
 let WindowAttributes = [
   'window', 'self', 'document', 'location', 'history',
-  'customElements', 'menubar', 'personalbar', 'scrollbars',
+  'customElements', 'menubar', 'personalbar',
   'statusbar', 'toolbar', 'status', 'close', 'closed',
   'stop', 'focus', 'blur', 'frames', 'length', 'top',
   'opener', 'parent', 'frameElement', 'open', 'navigator',
   'applicationCache', 'alert', 'confirm', 'prompt', 'print',
-  'postMessage', 'console'
+  'postMessage', 'console', 'locationbar', 'origin', 'external',
+  'screen', 'screenLeft', 'screenTop', 'screenX', 'screenY',
+  'scroll', 'scrollbars', 'scrollBy', 'scrollByLines', 'scroolByPages', 
+  'scrollMaxX', 'scrollMaxY', 'scrollTo', 'scrollX', 'scrollY'
 ];
 names = filterOut(names, WindowAttributes);
 
@@ -58,7 +61,7 @@ names = names.filter(e => !e.match(/^on/))
 
 
 // webkit 
-names = names.filter(e => !e.match(/^webkit/))
+names = names.filter(e => !e.match(/^webkit/i))
 
 
 // HTML 标准中的接口
@@ -77,7 +80,8 @@ let interfaces = [
   "PromiseRejectionEvent", "RadioNodeList", "SharedWorker", "SharedWorkerGlobalScope", 
   "Storage", "StorageEvent", "TextMetrics", "TextTrack", "TextTrackCue", "TextTrackCueList", 
   "TextTrackList", "TimeRanges", "TrackEvent", "ValidityState", "VideoTrack", "VideoTrackList", 
-  "WebSocket", "Window", "Worker", "WorkerGlobalScope", "WorkerLocation", "WorkerNavigator"
+  "WebSocket", "Window", "Worker", "WorkerGlobalScope", "WorkerLocation", "WorkerNavigator",
+  "HTMLFormControlsCollection"
 ];
 names = filterOut(names, interfaces);
 
@@ -221,7 +225,7 @@ names = filterOut(names, [
 // DOM
 // https://dom.spec.whatwg.org/
 names = filterOut(names, [
-  "StaticRange", "AbortController", "AbortSignal"
+  "StaticRange", "AbortController", "AbortSignal", "NamedNodeMap"
 ]);
 
 // DOM4
@@ -267,12 +271,18 @@ names = filterOut(names, ["DOMParser", "XMLSerializer"]);
 // Unknown
 // not found in MDN
 names = filterOut(names, [
-  "MediaEncryptedEvent"
+  "MediaEncryptedEvent", "CSSFontFaceRule"
 ]);
 
 // non standard
 names = filterOut(names, [
   "TextEvent"
+]);
+
+// other
+names = filterOut(names, [
+  "name", // ???
+  "DOMException"
 ]);
 
 // https://xhr.spec.whatwg.org/
@@ -314,6 +324,7 @@ names = filterOut(names, ["PerformanceLongTaskTiming", "TaskAttributionTiming"])
 // CSSOM
 // https://drafts.csswg.org/cssom/
 names = filterOut(names, [
+  "CSS",
   "MediaList", "StyleSheet", "CSSStyleSheet", "StyleSheetList", 
   "LinkStyle", "CSSRuleList", "CSSRule", "CSSStyleRule", "CSSImportRule", 
   "CSSGroupingRule", "CSSPageRule", "CSSMarginRule", "CSSNamespaceRule", 
@@ -334,7 +345,24 @@ names = filterOut(names, [
   "CSSMathValue", "CSSMathSum", "CSSMathProduct", "CSSMathNegate", "CSSMathInvert", 
   "CSSMathMin", "CSSMathMax", "CSSMathClamp", "CSSNumericArray", "CSSTransformValue", 
   "CSSTransformComponent", "CSSTranslate", "CSSRotate", "CSSScale", "CSSSkew", "CSSSkewX", 
-  "CSSSkewY", "CSSPerspective", "CSSMatrixComponent", "CSSImageValue"
+  "CSSSkewY", "CSSPerspective", "CSSMatrixComponent", "CSSImageValue",
+  "CSSPositionValue"
+]);
+
+// CSS Font Loading Module Level 3
+// https://drafts.csswg.org/css-font-loading/
+names = filterOut(names, ["FontFace", "FontFaceSetLoadEvent"]);
+
+// CSS Conditional Rules Module Level 3
+// https://drafts.csswg.org/css-conditional-3/
+names = filterOut(names, [
+  "CSSGroupingRule", "CSSConditionRule", "CSSMediaRule", "CSSSupportsRule"
+]);
+
+// CSS Animations Level 1
+// https://drafts.csswg.org/css-animations/
+names = filterOut(names, [
+  "AnimationEvent", "CSSKeyframeRule", "CSSKeyframesRule"
 ]);
 
 // Selection API
@@ -374,9 +402,68 @@ names = filterOut(names, ["ReportingObserver"]);
 // https://w3c.github.io/pointerevents/#pointerevent-interface
 names = filterOut(names, ["PointerEvent"]);
 
-// PerformanceTiming
-// deprecated
-names = filterOut(names, ["PerformanceTiming"]);
+// Performance 
+names = filterOut(names, [
+  "Performance", "PerformanceEntry", "PerformanceFrameTiming",
+  "PerformanceMark", "PerformanceMeasure", "PerformanceNavigationTiming",
+  "PerformanceObserver", "PerformanceResourceTiming",
+  "PerformanceTiming"
+]);
+
+// Server Timing
+// https://w3c.github.io/server-timing/#the-dfn-performanceservertiming-dfn-interface
+names = filterOut(names, ["PerformanceServerTiming"]);
+
+// Paint Timing
+// https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming
+names = filterOut(names, ["PerformancePaintTiming"]);
+
+// Performance Timeline Level 2
+// https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming
+names = filterOut(names, [
+  "Performance", "PerformanceEntry", "PerformanceObserver", 
+  "PerformanceObserverEntryList"
+]);
+
+// Navigation Timing
+// https://www.w3.org/TR/navigation-timing/#sec-navigation-info-interface
+names = filterOut(names, ["PerformanceNavigation"]);
+
+// Intersection Observer 
+// https://w3c.github.io/IntersectionObserver/#intersection-observer-entry
+// 判断元素可见性，或者相对位置
+names = filterOut(names, [
+  "IntersectionObserver", "IntersectionObserverEntry"
+]);
+
+// Input Device Capabilities
+// https://wicg.github.io/InputDeviceCapabilities/#dom-uievent-sourcecapabilities
+names = filterOut(names, ["InputDeviceCapabilities"]);
+
+// Cooperative Scheduling of Background Tasks
+// https://www.w3.org/TR/requestidlecallback/
+names = filterOut(names, ["IdleDeadline"]);
+
+// HTMLOptionsCollection 
+// https://www.w3.org/TR/DOM-Level-2-HTML/html.html#HTMLOptionsCollection
+names = filterOut(names, [
+  "HTMLCollection", "HTMLOptionsCollection"
+]);
+
+// File API
+// https://w3c.github.io/FileAPI
+names = filterOut(names, ["Blob", "File", "FileList", "FileReader", "FileReaderSync"]);
+
+// Geometry Interfaces Module Level 1
+// https://drafts.fxtf.org/geometry/
+names = filterOut(names, [
+  "DOMPointReadOnly", "DOMPoint", "DOMRectReadOnly", "DOMRect",
+  "DOMRectList", "DOMQuad", "DOMMatrixReadOnly", "DOMMatrix"
+]);
+
+// Clipboard
+// https://w3c.github.io/clipboard-apis/
+names = filterOut(names, ["Clipboard", "ClipboardEvent"]);
 
 
 // ============================================================================
