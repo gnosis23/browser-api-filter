@@ -47,6 +47,13 @@ let WindowAttributes = [
   'stop', 'focus', 'blur', 'frames', 'length', 'top',
   'opener', 'parent', 'frameElement', 'open', 'navigator',
   'applicationCache', 'alert', 'confirm', 'prompt', 'print',
+  'postMessage',
+  // https://html.spec.whatwg.org/multipage/custom-elements.html#dom-window-customelements
+  'customElements',
+  'external',
+  'createImageBitmap',
+  'sessionStorage',
+  'localStorage',
 ];
 names = filterOut(names, WindowAttributes);
 
@@ -80,6 +87,13 @@ let interfaces = [
 ];
 names = filterOut(names, interfaces);
 
+// HTML5
+// https://www.w3.org/TR/html50/browsers.html
+names = filterOut(names, [
+  'locationbar', 'menubar', 'personalbar', 'defaultStatus', 'defaultstatus',
+  'btoa', 'atob', 'WindowBase64', 
+  'setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'
+]);
 
 //  the ECMAScript Internationalization API
 names = names.filter(e => e != "Intl");
@@ -205,6 +219,7 @@ names = filterOut(names, [
 // Indexed DB
 // https://w3c.github.io/IndexedDB/
 names = filterOut(names, [
+  'indexedDB',
   "IDBRequest", "IDBOpenDBRequest", "IDBVersionChangeEvent", "IDBFactory", "IDBDatabase", 
   "IDBObjectStore", "IDBIndex", "IDBKeyRange", "IDBCursor", "IDBCursorWithValue", 
   "IDBTransaction"
@@ -220,7 +235,8 @@ names = filterOut(names, [
 // DOM
 // https://dom.spec.whatwg.org/
 names = filterOut(names, [
-  "StaticRange", "AbortController", "AbortSignal", "NamedNodeMap"
+  "StaticRange", "AbortController", "AbortSignal", "NamedNodeMap",
+  'event'
 ]);
 
 // DOM4
@@ -263,15 +279,18 @@ names = filterOut(names, [
 // https://w3c.github.io/DOM-Parsing/
 names = filterOut(names, ["DOMParser", "XMLSerializer"]);
 
-// Unknown
-// not found in MDN
+// Unknown or not found in MDN
 names = filterOut(names, [
-  "MediaEncryptedEvent", "CSSFontFaceRule"
+  "MediaEncryptedEvent", "CSSFontFaceRule", 'origin', 'clientInformation',
+  'offscreenBuffering', 'styleMedia', 'capture​Events', 'captureEvents',
+  'releaseEvents', 'find', 'UserActivation', 'XSLTProcessor'
 ]);
 
-// non standard
+// non standard or non-normative
 names = filterOut(names, [
-  "TextEvent"
+  "TextEvent",
+  'queueMicrotask',
+  'chrome',
 ]);
 
 // other
@@ -293,7 +312,7 @@ names = filterOut(names, [
 ]);
 
 // https://wicg.github.io/visual-viewport/#the-visualviewport-interface
-names = filterOut(names, ["VisualViewport"]);
+names = filterOut(names, ["VisualViewport", 'visualViewport']);
 
 // Web Video Text Track 
 // https://w3c.github.io/webvtt/
@@ -319,7 +338,8 @@ names = filterOut(names, ["PerformanceLongTaskTiming", "TaskAttributionTiming"])
 // CSSOM
 // https://drafts.csswg.org/cssom/
 names = filterOut(names, [
-  "CSS",
+  "CSS", // namespace
+  "getComputedStyle",
   "MediaList", "StyleSheet", "CSSStyleSheet", "StyleSheetList", 
   "LinkStyle", "CSSRuleList", "CSSRule", "CSSStyleRule", "CSSImportRule", 
   "CSSGroupingRule", "CSSPageRule", "CSSMarginRule", "CSSNamespaceRule", 
@@ -329,6 +349,21 @@ names = filterOut(names, [
 // CSSOM View
 // https://drafts.csswg.org/cssom-view/
 names = filterOut(names, [
+  "matchMedia",
+  "screen",
+  // browsing context
+  "moveTo",
+  "moveBy",
+  "resizeTo",
+  "resizeBy",
+  // viewport
+  "innerWidth", "innerHeight",
+  // viewport scrolling
+  "scrollX", "pageXOffset", "scrollY", "pageYOffset",
+  "scroll", "scrollTo", "scrollBy",
+  // client
+  "screenX", "screenLeft", "screenY", "screenTop", "outerWidth", "outerHeight",
+  "devicePixelRatio",
   "MediaQueryList", "MediaQueryListEvent", "Screen", "CaretPosition"
 ]);
 
@@ -362,7 +397,7 @@ names = filterOut(names, [
 
 // Selection API
 // https://w3c.github.io/selection-api
-names = filterOut(names, ["Selection"]);
+names = filterOut(names, ["Selection", 'getSelection']);
 
 // Webapp Security
 // https://w3c.github.io/webappsec-csp/
@@ -383,7 +418,7 @@ names = filterOut(names, [
 
 // fetch
 // https://fetch.spec.whatwg.org/
-names = filterOut(names, ["Headers", "Request", "Response"]);
+names = filterOut(names, ["Headers", "Request", "Response", 'fetch']);
 
 // https://drafts.csswg.org/resize-observer/#resize-observer-entry-interface
 names = filterOut(names, [
@@ -416,6 +451,7 @@ names = filterOut(names, ["PerformancePaintTiming"]);
 // Performance Timeline Level 2
 // https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming
 names = filterOut(names, [
+  "performance",
   "Performance", "PerformanceEntry", "PerformanceObserver", 
   "PerformanceObserverEntryList"
 ]);
@@ -437,7 +473,9 @@ names = filterOut(names, ["InputDeviceCapabilities"]);
 
 // Cooperative Scheduling of Background Tasks
 // https://www.w3.org/TR/requestidlecallback/
-names = filterOut(names, ["IdleDeadline"]);
+names = filterOut(names, [
+  "IdleDeadline", 'requestIdleCallback', 'cancelIdleCallback'
+]);
 
 // HTMLOptionsCollection 
 // https://www.w3.org/TR/DOM-Level-2-HTML/html.html#HTMLOptionsCollection
@@ -459,6 +497,83 @@ names = filterOut(names, [
 // Clipboard
 // https://w3c.github.io/clipboard-apis/
 names = filterOut(names, ["Clipboard", "ClipboardEvent"]);
+
+// Console API
+// https://console.spec.whatwg.org/
+names = filterOut(names, ["console"]); // namespace
+
+// https://w3c.github.io/webappsec-secure-contexts/
+names = filterOut(names, ["isSecureContext"]);
+
+// https://www.w3.org/TR/animation-timing/#dom-windowanimationtiming-requestanimationframe
+names = filterOut(names, [
+  'requestAnimationFrame', 'cancelAnimationFrame'
+]);
+
+// https://tc39.github.io/proposal-global/#sec-other-properties-of-the-global-object-global
+names = filterOut(names, ["globalThis"]);
+
+// WebAssembly
+// https://www.w3.org/TR/wasm-web-api-1/
+names = filterOut(names, [
+  'WebAssembly',
+
+]);
+
+// https://wicg.github.io/background-fetch/
+names = filterOut(names, [
+  'BackgroundFetchManager', 'BackgroundFetchRegistration',
+  'BackgroundFetchRecord'
+]);
+
+// https://wicg.github.io/mediasession/#index
+names = filterOut(names, [
+  'MediaSession', 'MediaMetadata'
+]);
+
+// Notification API
+// https://notifications.spec.whatwg.org/
+names = filterOut(names, [
+  'Notification', 'NotificationEvent'
+]);
+
+// Payment Handler
+// https://w3c.github.io/payment-handler/#idl-index
+names = filterOut(names, [
+  'PaymentManager', 'PaymentInstruments', 'CanMakePaymentEvent',
+  'PaymentRequestEvent', 'PaymentRequestUpdateEvent'
+]);
+
+// Permissions API
+// https://w3c.github.io/permissions/
+names = filterOut(names, ["Permissions", "PermissionStatus"]);
+
+// Picture in Picture
+// https://wicg.github.io/picture-in-picture/
+names = filterOut(names, [
+  'PictureInPictureWindow', 'EnterPictureInPictureEvent'
+]);
+
+// Push API
+// https://w3c.github.io/push-api/
+names = filterOut(names, [
+  'PushManager', 'PushSubscriptionOptions', 'PushSubscription'
+]);
+
+// https://www.w3.org/TR/remote-playback/
+names = filterOut(names, ["RemotePlayback"]);
+
+// Web Speech API
+// https://w3c.github.io/speech-api/
+names = filterOut(names, [
+  'speechSynthesis',
+  'SpeechRecognition', 'SpeechRecognitionErrorEvent',
+  'SpeechRecognitionAlternative', 'SpeechRecognitionResult',
+  'SpeechRecognitionResultList', 'SpeechRecognitionEvent',
+  'SpeechGrammar', 'SpeechSynthesis', 'SpeechSynthesisErrorEvent',
+  'SpeechSynthesisEvent', 'SpeechSynthesisUtterance'
+]);
+
 
 
 // ============================================================================
