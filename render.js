@@ -7,5 +7,5 @@ restCnt.textContent = words.length;
 apiName.textContent = words.length ? words[0] : 'GaGa';
 
 document.getElementsByClassName('myButton')[0].addEventListener('click', function () {
-  window.open(`https://www.google.com/search?q=${encodeURIComponent(words[0])}`,"_blank")
+  window.open(`https://www.google.com/search?q=${encodeURIComponent(words[0])}+mdn`,"_blank")
 });
