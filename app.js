@@ -283,7 +283,8 @@ names = filterOut(names, ["DOMParser", "XMLSerializer"]);
 names = filterOut(names, [
   "MediaEncryptedEvent", "CSSFontFaceRule", 'origin', 'clientInformation',
   'offscreenBuffering', 'styleMedia', 'capture​Events', 'captureEvents',
-  'releaseEvents', 'find', 'UserActivation', 'XSLTProcessor'
+  'releaseEvents', 'find', 'UserActivation', 'XSLTProcessor',
+  'openDatabase', 'ApplicationCacheErrorEvent'
 ]);
 
 // non standard or non-normative
@@ -574,8 +575,97 @@ names = filterOut(names, [
   'SpeechSynthesisEvent', 'SpeechSynthesisUtterance'
 ]);
 
+// Web Bluetooth
+// https://webbluetoothcg.github.io/web-bluetooth/#idl-index
+names = filterOut(names, [
+  "BluetoothUUID", "Bluetooth", "BluetoothCharacteristicProperties", 
+  "BluetoothDevice", "BluetoothRemoteGATTCharacteristic", 
+  "BluetoothRemoteGATTDescriptor", "BluetoothRemoteGATTServer", 
+  "BluetoothRemoteGATTService"
+]);
 
+// Web USB
+// https://wicg.github.io/webusb/#enumeration
+names = filterOut(names, [
+  "USB", "USBConnectionEvent", "USBDevice", "USBInTransferResult", "USBOutTransferResult", "USBIsochronousInTransferPacket", "USBIsochronousInTransferResult", "USBIsochronousOutTransferPacket", "USBIsochronousOutTransferResult", "USBConfiguration", "USBInterface", "USBAlternateInterface", "USBEndpoint", "USBPermissionResult"
+]);
 
+// Service Worker
+// https://w3c.github.io/ServiceWorker/
+names = filterOut(names, [
+  'ServiceWorker', 'ServiceWorkerRegistration', 'ServiceWorkerContainer',
+  'NavigationPreloadManager', 'ServiceWorkerMessageEvent',
+  'Cache', 'CacheStorage', 'caches'
+]);
+
+// https://w3c.github.io/deviceorientation/#devicemotionevent
+names = filterOut(names, [
+  'DeviceMotionEvent', 'DeviceMotionEventAcceleration',
+  'DeviceMotionEventRotationRate',
+  'DeviceOrientationEvent'
+]);
+
+// Presentation API
+// https://w3c.github.io/presentation-api/#interface-presentation
+names = filterOut(names, ["Presentation", "PresentationAvailability", "PresentationConnection", "PresentationConnectionAvailableEvent", "PresentationConnectionCloseEvent", "PresentationConnectionList", "PresentationReceiver", "PresentationRequest"]);
+
+// Worklet
+// https://drafts.css-houdini.org/worklets/#idl-index
+names = filterOut(names, ['Worklet']);
+
+// CredentialManagement
+// https://w3c.github.io/webappsec-credential-management/
+names = filterOut(names, [
+  'Credential', 'CredentialsContainer', 'PasswordCredential',
+  "FederatedCredential"
+]);
+
+// Keyboard Map
+// https://wicg.github.io/keyboard-map
+names = filterOut(names, ['KeyboardLayoutMap', 'Keyboard']);
+
+// Web Lock
+// https://wicg.github.io/web-locks/#api-lock
+names = filterOut(names, ['Lock', 'LockManager']);
+
+// Encrypted Media
+// https://w3c.github.io/encrypted-media/
+names = filterOut(names, [
+  'MediaKeySystemAccess', 'MediaKeys', 'MediaKeySession',
+  'MediaKeyStatusMap', 'MediaKeySystemAccess', 'MediaKeyMessageEvent'
+]);
+
+// Storage
+// https://storage.spec.whatwg.org/
+names = filterOut(names, ['StorageManager']);
+
+// Payment Request API
+// https://w3c.github.io/payment-request/
+names = filterOut(names, [
+  'PaymentAddress', 'PaymentRequest', 'PaymentResponse'
+]);
+
+// Generic Sensor API
+// https://www.w3.org/TR/generic-sensor/
+names = filterOut(names, ["Sensor", "SensorErrorEvent"]);
+
+// https://www.w3.org/TR/orientation-sensor/#absoluteorientationsensor-interface
+names = filterOut(names, ["OrientationSensor", "AbsoluteOrientationSensor", "RelativeOrientationSensor"]);
+
+// https://www.w3.org/TR/accelerometer/#accelerometer-interface
+names = filterOut(names, ['Accelerometer']);
+
+// https://www.w3.org/TR/gyroscope/
+names = filterOut(names, ['Gyroscope']);
+
+// https://www.w3.org/TR/accelerometer/
+names = filterOut(names, ['LinearAccelerationSensor']);
+
+// Web Authentication
+// https://w3c.github.io/webauthn/
+names = filterOut(names, ["PublicKeyCredential", "AuthenticatorResponse", "AuthenticatorAttestationResponse", "AuthenticatorAssertionResponse"]);
+
+names = filterOut(names, ['parcelRequire']);
 // ============================================================================
 //                               HELPER
 // ============================================================================
