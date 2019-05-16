@@ -42,16 +42,11 @@ names = names.filter(e => {
 // Window 对象上的属性
 // https://html.spec.whatwg.org/#window
 let WindowAttributes = [
-  'window', 'self', 'document', 'location', 'history',
-  'customElements', 'menubar', 'personalbar',
+  'window', 'self', 'document', 'location', 'history', 'scrollbars',
   'statusbar', 'toolbar', 'status', 'close', 'closed',
   'stop', 'focus', 'blur', 'frames', 'length', 'top',
   'opener', 'parent', 'frameElement', 'open', 'navigator',
   'applicationCache', 'alert', 'confirm', 'prompt', 'print',
-  'postMessage', 'console', 'locationbar', 'origin', 'external',
-  'screen', 'screenLeft', 'screenTop', 'screenX', 'screenY',
-  'scroll', 'scrollbars', 'scrollBy', 'scrollByLines', 'scroolByPages', 
-  'scrollMaxX', 'scrollMaxY', 'scrollTo', 'scrollX', 'scrollY'
 ];
 names = filterOut(names, WindowAttributes);
 
