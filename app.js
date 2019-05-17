@@ -18,6 +18,9 @@ names = names.filter(e => !e.match(/^on/))
 // webkit 
 names = names.filter(e => !e.match(/^webkit/i))
 
+// moz
+names = names.filter(e => !e.match(/^moz/))
+
 // ============================================================================
 //                                whatwg
 // ============================================================================
@@ -462,6 +465,12 @@ names = filterOut(names, ['KeyboardLayoutMap', 'Keyboard']);
 // https://wicg.github.io/web-locks/#api-lock
 names = filterOut(names, ['Lock', 'LockManager']);
 
+// File and Directory Entries
+// https://wicg.github.io/entries-api/
+names = filterOut(names, [
+  'FileSystem', 'FileSystemEntry', 'FileSystemDirectoryEntry',
+  'FileSystemDirectoryReader', 'FileSystemFileEntry'
+]);
 
 // ============================================================================
 //                                csswg.org
@@ -527,6 +536,14 @@ names = filterOut(names, [
 names = filterOut(names, [
   "ResizeObserver", "ResizeObserverEntry"
 ]);
+
+// Web Animations
+// https://drafts.csswg.org/web-animations
+names = filterOut(names, ['Animation', 'AnimationEffect', 'AnimationPlaybackEvent']);
+
+// CSS Counter Styles Level 3
+// https://drafts.csswg.org/css-counter-styles-3
+names = filterOut(names, ['CSSCounterStyleRule']);
 
 // CSS Typed OM Level 1
 // https://drafts.css-houdini.org/css-typed-om-1/
@@ -662,12 +679,22 @@ names = filterOut(names, [
   "DOMRectList", "DOMQuad", "DOMMatrixReadOnly", "DOMMatrix"
 ]);
 
-// non-normative
+// non-standard
 names = filterOut(names, [
   "TextEvent",
   'queueMicrotask',
   'chrome',
   'ReportingObserver',
+  'getDefaultComputedStyle',
+  'scrollByLines',
+  'scrollByPages',
+  // firefox
+  'sizeToContent',
+  'updateCommands',
+  'dump',
+  'setResizable',
+  'scrollMaxX', 'scrollMaxY',
+  'fullScreen',
 ]);
 
 // Unknown or not found in MDN
@@ -684,6 +711,8 @@ names = filterOut(names, ['parcelRequire']);
 // ============================================================================
 //                               HELPER
 // ============================================================================
+names.sort();
+console.log(names);
 
 function filterOut(names, props) {
   const set = new Set(props);
