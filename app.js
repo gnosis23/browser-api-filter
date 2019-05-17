@@ -21,6 +21,9 @@ names = names.filter(e => !e.match(/^webkit/i))
 // moz
 names = names.filter(e => !e.match(/^moz/))
 
+// ms
+names = names.filter(e => !e.match(/^MS/))
+
 // ============================================================================
 //                                whatwg
 // ============================================================================
@@ -711,8 +714,6 @@ names = filterOut(names, ['parcelRequire']);
 // ============================================================================
 //                               HELPER
 // ============================================================================
-names.sort();
-console.log(names);
 
 function filterOut(names, props) {
   const set = new Set(props);
